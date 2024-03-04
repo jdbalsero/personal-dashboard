@@ -1,0 +1,45 @@
+.NavbarSearch {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+
+    width: 597px;
+    height: 41px;
+
+    background: #515868;
+    border: 1px solid #515868;
+    border-radius: 8px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    font-family: 'aeonik';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    flex: 1;
+    outline: none;
+    caret-color: #ffffff;
+    color: #ffffff;
+}
+
+.NavbarSearch::placeholder {
+    font-family: 'aeonik';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 17px;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
