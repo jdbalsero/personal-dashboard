@@ -1,105 +1,90 @@
-import React, { useState, useEffect, useContext} from 'react';
-// import { useHistory } from "react-router-dom";
-// import { CuadroAllClientes } from './CuadroAllClientes';
-// import { ContentHeader } from '../../../components/Shared/ContentHeader';
-// import ApiMiddleware from "../../../components/Shared/ApiMiddleware";
+import React, { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from '../../../context/GlobalContext';
+import { ContentHeader } from '../../../components/Shared/ContentHeader'
+import { TableTasksToApprove } from './TableTasksToApprove';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { Button } from '../../../components/Shared/Button';
+import { AiOutlineSearch } from 'react-icons/ai';
+import './news.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 const MySwal = withReactContent(Swal);
 
-
 function NewsPage() {
-  // const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api/v1";
-  // const history = useHistory();
-  // const { setActivePage, setToken, token, emailGlobal, setEmailGlobal, idUserGlobal, setIdUserGlobal, setUserName } = useContext(GlobalContext)
-  // const [clientes, setClientes] = useState();
-  // const bgColors = ['#EBBE46','#B57FFF','#4285FF','#DC7E80'];
+    const Categories = ['General', 'Business', 'Entertainment', 'Science', 'Sports', 'Health', 'Technology'];
+    const { setActiveBlur } = useContext(GlobalContext);
+    const [news, setNews] = useState([])
+    const [value, setValue] = React.useState(Categories[0]);
+    const [inputValue, setInputValue] = React.useState('');
 
-  // const consumeFetch = async (url, options) => {
-  //   try {
-  //       const originalFetch = fetch;
-  //       const fetchWithMiddleware = ApiMiddleware(originalFetch);
-  //       const { response, token } = await fetchWithMiddleware(url, options);
-  //       // Se detecta token nuevo
-  //       if (token) {
-  //           setToken(token)
-  //       }
-  //       return await response;
-  //   } catch (error) {
-  //       if (error.message === "RefreshToken Vencido") {
-  //           console.log(error.message, error)
+    const handleSearchClick = () =>{
+        showNews(String(value).toLowerCase());
+    }
 
-  //           setToken("");
-  //           setEmailGlobal("");
-  //           setIdUserGlobal("");
-  //           setUserName("");
-  //           setActivePage("Home");
-  //           history.push('/');
-  //       }
-  //   }
-  // }
+    const showNews = async (category=null) => {
+        const API_BASE_URL = category === null ? 
+        `https://newsapi.org/v2/top-headlines?language=en&category=general&apiKey=${process.env.REACT_APP_NEWSAPI_KEY}`
+        : `https://newsapi.org/v2/top-headlines?language=en&category=${category}&apiKey=${process.env.REACT_APP_NEWSAPI_KEY}`;
+        try {
+            const response = await fetch(API_BASE_URL).then(response => {
+              return response;
+            });
+            if (!response.ok) {
+                throw new Error('Error en la solicitud');
+            }
+            let data = await response.json();
+            console.log(data);
+            setNews(data.articles);
+        } catch (error) {
+            console.error(error);
+            setActiveBlur(true);
+            MySwal.fire({
+                icon: 'error',
+                title: 'Oops ...',
+                text: 'There was an error searching news, please check your filter selection and try again.',
+                showConfirmButton: false,
+                timer: 1700,
+                backdrop: true,
+                customClass: {
+                    popup: 'popup-sweet',
+                    title: 'title-sweet',
+                    htmlContainer: 'text-sweet',
+                    confirmButton: 'confirm-button-sweet',
+                    denyButton: 'deny-button-sweet',
+                }
+            }).finally(() => {setActiveBlur(false)});
+        }
+      }
 
-  // const fetchData = async () => {
-  //   let ruta = `${API_BASE_URL}/users/usersByRole`;
-  //   const role = "Client"
-  //   const url = `${ruta}/${role}`;
-  //   try {
-  //       const response = await consumeFetch(url, {
-  //           headers: {
-  //               Authorization: `${token}`
-  //           }
-  //       });
-  //       if (!response.ok) {
-  //           throw new Error('Error en la solicitud');
-  //       }
-  //       const data = await response.json();
-  //       let indexColor = 0;
-  //       const newRows = data.map((item, index) => {
-  //         let obj = {
-  //           idUser: item.id,
-  //           imagen: "ruta/a/la/imagenPersonalizada.jpg",
-  //           nombre: item.name,
-  //           correo: item.email,
-  //           telefono: item.phone,
-  //           company: item.company,
-  //           bgColor: bgColors[indexColor]
-  //         }
-  //         indexColor = indexColor === bgColors.length-1 ? 0 : indexColor+1;
-  //         return obj;
-  //       });
+    useEffect(() => {
+        showNews();
+    }, [])
 
-  //       setClientes(newRows);
-  //   } catch (error) {
-  //       console.error(error);
-  //       // Manejar el error
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-
-    return (
-      <React.Fragment>
-        {/* { clientes && (
-          <>
-            <div className="assistant-header" style={{display:'flex',flexDirection:'row',alignItems:'center',padding:'20px',gap:'10px',flex:'none',order:'0', alignSelf:'stretch',flexGrow:'0'}}>
-                  <ContentHeader text=" Clientes" />
-            </div>
-            <div className='profile' style={{display:'flex', gap:'20px',rowGap:'40px' ,flexWrap: 'wrap', justifyContent:'flex-start',alignItems:'center', alignContent:'center', padding:'20px' }}>
-              {clientes.map(
-                  option => <div key={option.idUser} style={{}}> <CuadroAllClientes
-                  cliente = {option}
-                  /></div>
-              )}
-            </div>
-          </>
-        )} */}
-        <div>News Works !!!</div>
-      </React.Fragment>
-    );
+    return <div className="data-tasks-container">
+        <ContentHeader text="News" />
+        <div className="search-section">
+            <Autocomplete
+                disablePortal
+                value={value}
+                onChange={(event, newValue) => {
+                    setValue(newValue);
+                    showNews(String(newValue).toLowerCase());
+                }}
+                inputValue={inputValue}
+                onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                }}
+                id="controllable-states-demo"
+                className='input-search'
+                options={Categories}
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="News Category" />}
+            />
+            <Button buttonClassName="search-news-button" onClick={handleSearchClick} icon={<AiOutlineSearch style={{heigth: '400px'}}/>}/>
+        </div>
+        <TableTasksToApprove data={news} fetchData={showNews} />
+    </div>
 }
 
-export { NewsPage };
+export { NewsPage }

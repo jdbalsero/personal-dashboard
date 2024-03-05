@@ -9,7 +9,7 @@ function Navbar() {
         <React.Fragment>
             <div className='navbar'>
                 <div className='left-navbar'>
-                    <Link to='/'>
+                    <Link to='/Weather'>
                     <NavbarLogo />
                     </Link>
                 </div>

@@ -96,7 +96,22 @@ function WeatherPage() {
         });
     } catch (error) {
         console.error(error);
-        // Manejar el error
+        setActiveBlur(true);
+        MySwal.fire({
+            icon: 'error',
+            title: 'Oops ...',
+            text: 'There was an error searching the location, please check the location name and try again.',
+            showConfirmButton: false,
+            timer: 1700,
+            backdrop: true,
+            customClass: {
+                popup: 'popup-sweet',
+                title: 'title-sweet',
+                htmlContainer: 'text-sweet',
+                confirmButton: 'confirm-button-sweet',
+                denyButton: 'deny-button-sweet',
+            }
+        }).finally(() => {setActiveBlur(false)});
     }
   }
 

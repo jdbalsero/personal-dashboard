@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import Cookies from 'js-cookie';
 import { useHistory } from "react-router-dom";
 import { ListSidebar } from './ListSidebar';
-import { ProfileButtonSidebar } from './ProfileButtonSidebar';
 import './ListSidebar/ListSidebar.css'
 import './Sidebar.css'
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
@@ -90,10 +88,11 @@ function Sidebar(props) {
                                 color='#A4A4A4'
                             />
                         ) : (isCollapsed ? <img
-                        src={menu}
+                            src={menu}
                             id='toggleSidebarButton'
                             className='collapse-icon'
                             color='#A4A4A4'
+                            alt="Open Sidebar"
                         /> : <></>)}
                     </button>
                 </div>
