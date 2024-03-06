@@ -1,5 +1,4 @@
 import ReactModal from 'react-modal';
-import "../../pages/userContent/news/popup_style.css";
 import "./Popup.css"
 
 function Popup(props) {

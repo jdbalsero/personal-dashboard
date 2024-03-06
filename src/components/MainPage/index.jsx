@@ -1,29 +1,16 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content';
-import { useHistory, useParams } from "react-router-dom";
-import Cookies from 'js-cookie';
-
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import { Sidebar } from '../sidebar';
 import { Navbar } from '../Navbar';
 import { userMainOptions } from '../../constants/userMainOptions';
-import { CustomizedSnackbar } from '../Shared/Snackbar';
-
 import { GlobalContext } from '../../context/GlobalContext';
-import { AiFillProject } from 'react-icons/ai';
 
 import './MainPage.css';
 
-const INACTIVITY_TIMEOUT = 300000; // 5 minutos en milisegundos
-const MySwal = withReactContent(Swal);
-
 function MainPage() {
 
-    const { userRole, setActivePage, setToken, setEmailGlobal, setIdUserGlobal, setUserName, setShowNotificationsBadge, activeBlur, setActiveBlur, planesUsuario } = useContext(GlobalContext)
-    const [lastInteraction, setLastInteraction] = useState(Date.now());
-    const [activePopUpLogOut, setActivePopUpLogOut] = useState(false);
+    const { setActivePage, activeBlur, setActiveBlur } = useContext(GlobalContext)
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const history = useHistory();
     const { component } = useParams();
 
     useEffect(()=>{
@@ -35,8 +22,6 @@ function MainPage() {
     };
 
     const options = [...mainOptions()];
-
-    const SnackbarRef = useRef();
 
     useEffect(()=> {
         setActivePage(component)
@@ -55,13 +40,6 @@ function MainPage() {
 
     return (
         <div className="main-page">
-            <CustomizedSnackbar
-                open={SnackbarRef.open}
-                severity={SnackbarRef.snackbarType}
-                message={SnackbarRef.snackbarMessage}
-                handleClose={SnackbarRef.handleClose}
-                ref={SnackbarRef}
-            />
             <Navbar />
             <div className="content-wrapper">
                 <Sidebar

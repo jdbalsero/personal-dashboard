@@ -1,34 +1,34 @@
-.modal-task-header-right {
+.modal-news-header-right {
     display: flex;
     flex-direction: column;
     gap: 7px;
 }
 
-.modal-task-label {
+.modal-news-label {
     font-size: 15px;
     line-height: 15px;
     color: #000;
     font-weight: bold;
 }
 
-.modal-task-header-title {
+.modal-news-header-title {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--main-petroleum-color);
+    color: var(--main-blue-color);
     padding-top: 10px;
     margin: 10px;
 }
 
-.modal-task-header-title>h2 {
+.modal-news-header-title>h2 {
     font-weight: bold;
     font-size: 28px;
     line-height: 24px;
     font-family: 'nib', sans-serif;
 }
 
-.full-task-modal{
+.full-news-modal{
     max-height: 700px;
     max-width: 1200px;
 }

@@ -19,3 +19,46 @@
 .react-modal::-webkit-scrollbar-track {
     background-color: #f1f1f100;
 }
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+    font-family: 'aeonik'!important;
+}
+
+.css-ahj2mt-MuiTypography-root{
+    font-family: 'aeonik'!important;
+}
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
+    font-family: 'aeonik'!important;
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
+    font-family: 'aeonik'!important;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select{
+    font-family: 'aeonik'!important;
+}
+.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+    font-family: 'aeonik'!important;
+
+}
+
+.ReactModal__Content {
+    position: absolute;
+    top: 50%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: white;
+    padding: 20px;
+    height: fit-content;
+    -webkit-box-shadow: 0px 4px 36px -4px rgba(0,0,0,0.55);
+    -moz-box-shadow: 0px 4px 36px -4px rgba(0,0,0,0.55);
+    box-shadow: 0px 4px 36px -4px rgba(0,0,0,0.55);
+  }
+
+  @media screen and (max-width: 920px) {
+    .ReactModal__Content {
+        width: 80%;
+    }
+}

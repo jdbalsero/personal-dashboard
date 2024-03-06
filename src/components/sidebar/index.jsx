@@ -1,25 +1,20 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { ListSidebar } from './ListSidebar';
 import './ListSidebar/ListSidebar.css'
 import './Sidebar.css'
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
 import { GlobalContext } from '../../context/GlobalContext';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content';
 import menu from "../../assets/images/menu.png"
-
-const MySwal = withReactContent(Swal);
 
 function Sidebar(props) {
 
-    let { mainOptions,  onLogoutClick } = props;
+    let { mainOptions } = props;
     mainOptions = mainOptions.filter(option => option.show === true);
 
     const history = useHistory();
-    const { activePage, setToken, setEmailGlobal, setIdUserGlobal, setUserName, showSupportBadge, setShowSupportBadge, showAdminBadge, setShowAdminBadge,  setActiveBlur} = useContext(GlobalContext);
+    const { activePage } = useContext(GlobalContext);
     const [isCollapsed, setIsCollapsed] = useState(false);
-    const sidebarRef = useRef(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const updateScreenWidth = () => {
@@ -68,7 +63,6 @@ function Sidebar(props) {
                         selectedOption={activePage}
                         onOptionClick={handleOptionClick}
                         isCollapsed={isCollapsed}
-                        showBadge={showAdminBadge}
                     />
                 </div>
                 <div className='lower-sidebar'>

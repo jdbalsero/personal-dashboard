@@ -31,6 +31,31 @@
     margin: 0;
   }
 
+  @media only screen and (max-width: 500px) {
+    /* .details-text {
+      font-size: 14px;
+    } */
+    .weather-box {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+
+  .search-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
+
+  .text-search-container{
+    width: 80%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
   .icon-text{
     display:flex;
     align-items: center;

@@ -1,25 +1,23 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { GlobalContext } from '../../../context/GlobalContext';
-// import ApiMiddleware from "../../../components/Shared/ApiMiddleware";
 import { Button } from "../../../components/Shared/Button";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
-import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import './ToDoListPage.css';
+import Checkbox from '@mui/material/Checkbox';
+import { ContentHeader } from '../../../components/Shared/ContentHeader'
+import './tasks_style.css';
 const MySwal = withReactContent(Swal);
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -61,7 +59,7 @@ function TasksPage() {
         }).then((result) => {
             if (result.isConfirmed) {
                 todolist_tasks.splice(todo_id,1);
-                localStorage.setItem('Tasks',todolist_tasks);
+                localStorage.setItem("Tasks", JSON.stringify(todolist_tasks));
                 setActiveBlur(true);
                 MySwal.fire({
                     icon: 'success',
@@ -78,16 +76,15 @@ function TasksPage() {
                         denyButton: 'deny-button-sweet',
                     }
                 }).finally(() => {setActiveBlur(false)});
-                // fetchData();
+                fetchData();
             }
         }).finally(() => {setActiveBlur(false)});
     };
 
     const handleAddToDoTask = async() => {
-        console.log(inputValue);
         try{
-            todolist_tasks.append({description: inputValue, status:"Active"});
-            localStorage.setItem('Tasks', todolist_tasks);
+            todolist_tasks.push({description: inputValue, status:"Active"});
+            localStorage.setItem("Tasks", JSON.stringify(todolist_tasks));
             setActiveBlur(true);
             MySwal.fire({
                 icon: 'success',
@@ -105,14 +102,14 @@ function TasksPage() {
                 }
             }).finally(() => {setActiveBlur(false)});
             setInputValue('');
-            // fetchData();
+            fetchData();
         }catch(err){
             console.error(err);
             setActiveBlur(true);
             MySwal.fire({
                 icon: 'error',
                 title: 'Oops ...',
-                text: 'There was a unexpected error, please contact support.',
+                text: 'There was a unexpected error adding the new task, please contact support.',
                 showConfirmButton: false,
                 timer: 1700,
                 backdrop: true,
@@ -127,24 +124,54 @@ function TasksPage() {
         }
     }
 
-    const compare = (a,b) => {
-        if ( a.description < b.description ){
-            return -1;
+    const handleUpdateStatus = async (id, value) => {
+        try{
+            todolist_tasks[id].status = value ? "Completed":"Active";
+            localStorage.setItem("Tasks", JSON.stringify(todolist_tasks));
+            fetchData();
+        }catch(err){
+            console.error(err);
+            setActiveBlur(true);
+            MySwal.fire({
+                icon: 'error',
+                title: 'Oops ...',
+                text: 'There was a unexpected error updating the task, please contact support.',
+                showConfirmButton: false,
+                timer: 1700,
+                backdrop: true,
+                customClass: {
+                    popup: 'popup-sweet',
+                    title: 'title-sweet',
+                    htmlContainer: 'text-sweet',
+                    confirmButton: 'confirm-button-sweet',
+                    denyButton: 'deny-button-sweet',
+                }
+            }).finally(() => {setActiveBlur(false)});
         }
-        if ( a.description > b.description ){
-            return 1;
-        }
-        return 0;
     }
 
     const fetchData = async () => {
         try {
-            const newRows = localStorage.getItem('Tasks');
-            newRows.sort(compare);
+            let newRows = JSON.parse(localStorage.getItem("Tasks")) === null ? [] : JSON.parse(localStorage.getItem("Tasks"));
             setToDoListTasks(newRows);
         } catch (error) {
             console.error(error);
-            // Manejar el error
+            setActiveBlur(true);
+            MySwal.fire({
+                icon: 'error',
+                title: 'Oops ...',
+                text: 'There was a unexpected error retrieving the tasks, please contact support.',
+                showConfirmButton: false,
+                timer: 1700,
+                backdrop: true,
+                customClass: {
+                    popup: 'popup-sweet',
+                    title: 'title-sweet',
+                    htmlContainer: 'text-sweet',
+                    confirmButton: 'confirm-button-sweet',
+                    denyButton: 'deny-button-sweet',
+                }
+            }).finally(() => {setActiveBlur(false)});
         }
     };
 
@@ -155,23 +182,33 @@ function TasksPage() {
     return (
         <React.Fragment>
             <div className="todo-general-container">
-                <p className="todo-title">Tasks</p>
+                <ContentHeader text="Tasks" />
                 {todolist_tasks.length > 0 ? 
-                    <div className="list-todo">
+                    <div className="list-task">
                         <List sx={{ width: '100%' }}>
                             {todolist_tasks.map((option, index) => {
                                 const labelId = `item-list-label-${option}`;
                                 return (
-                                <div key={option.id}>
-                                    <ListItem className="todo-item" disablePadding secondaryAction={
+                                <div key={index}>
+                                    <ListItem className="task-item" disablePadding secondaryAction={
                                         <IconButton edge="end" aria-label="delete" onClick={() => {handleDeleteClick(index);}}>
                                             <DeleteIcon className="icon-color"/>
                                         </IconButton>
                                     }>
-                                        <ListItemIcon className="icon">
-                                            <RadioButtonCheckedIcon className="icon-color2"/>
+                                        <ListItemIcon className="task-checkbox-container">
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={option.status === "Active" ? false : true}
+                                                        style ={{
+                                                            color: "#5873FE",
+                                                        }}
+                                                        onChange={e => handleUpdateStatus(index, e.target.checked)}
+                                                    />
+                                                }
+                                            />
                                         </ListItemIcon>
-                                        <ListItemText id={labelId} primary={option.description} secondary={`Status: ${option.status ? "Completed" : "Active"}`}/>
+                                        <ListItemText id={labelId} primary={option.description} className={option.status === "Completed" ? 'linethrough' : ''}  secondary={`Status: ${option.status}`}/>
                                     </ListItem>
                                 </div>
                                 );

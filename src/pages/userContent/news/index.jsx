@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { GlobalContext } from '../../../context/GlobalContext';
 import { ContentHeader } from '../../../components/Shared/ContentHeader'
-import { TableTasksToApprove } from './TableTasksToApprove';
+import { TableNews } from './TableNews';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Button } from '../../../components/Shared/Button';
-import { AiOutlineSearch } from 'react-icons/ai';
 import './news.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -17,10 +15,6 @@ function NewsPage() {
     const [news, setNews] = useState([])
     const [value, setValue] = React.useState(Categories[0]);
     const [inputValue, setInputValue] = React.useState('');
-
-    const handleSearchClick = () =>{
-        showNews(String(value).toLowerCase());
-    }
 
     const showNews = async (category=null) => {
         const API_BASE_URL = category === null ? 
@@ -34,7 +28,6 @@ function NewsPage() {
                 throw new Error('Error en la solicitud');
             }
             let data = await response.json();
-            console.log(data);
             setNews(data.articles);
         } catch (error) {
             console.error(error);
@@ -61,7 +54,7 @@ function NewsPage() {
         showNews();
     }, [])
 
-    return <div className="data-tasks-container">
+    return <div className="data-news-container">
         <ContentHeader text="News" />
         <div className="search-section">
             <Autocomplete
@@ -81,9 +74,8 @@ function NewsPage() {
                 sx={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="News Category" />}
             />
-            <Button buttonClassName="search-news-button" onClick={handleSearchClick} icon={<AiOutlineSearch style={{heigth: '400px'}}/>}/>
         </div>
-        <TableTasksToApprove data={news} fetchData={showNews} />
+        <TableNews data={news} fetchData={showNews} />
     </div>
 }
 

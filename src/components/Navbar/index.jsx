@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import './Navbar.css';
 import { NavbarLogo } from './NavbarLogo';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min.js';
@@ -12,9 +12,6 @@ function Navbar() {
                     <Link to='/Weather'>
                     <NavbarLogo />
                     </Link>
-                </div>
-                <div className='right-navbar'>
-            
                 </div>
             </div>
         </React.Fragment>

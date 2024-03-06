@@ -8,12 +8,10 @@ import './index.css';
 const MySwal = withReactContent(Swal);
 
 function WeatherPage() {
-  // const history = useHistory();
   const { setActiveBlur } = useContext(GlobalContext);
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState({});
-  const [search, setSearch] = useState("")
-  const bgColors = ['#EBBE46','#B57FFF','#4285FF','#DC7E80'];
+  const [search, setSearch] = useState("");
 
   const searcher = (e) => {
     setSearch(e.target.value)   
@@ -29,7 +27,6 @@ function WeatherPage() {
             throw new Error('Error en la solicitud');
         }
         let data = await response.json();
-        console.log(data);
         setResponse({
           temperature: data.main.temp,
           condition: data.weather[0].main,
@@ -77,7 +74,6 @@ function WeatherPage() {
             throw new Error('Error en la solicitud');
         }
         let data = await response.json();
-        console.log(data);
         setResponse({
           temperature: data.main.temp,
           condition: data.weather[0].main,
@@ -137,17 +133,44 @@ function WeatherPage() {
         .query({ name: "geolocation" })
         .then(function (result) {
           if (result.state === "granted") {
-            //If granted then you can directly call your function here
             navigator.geolocation.getCurrentPosition(success, errors, options);
           } else if (result.state === "prompt") {
-            //If prompt then the user will be asked to give permission
             navigator.geolocation.getCurrentPosition(success, errors, options);
           } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
+            setActiveBlur(true);
+            MySwal.fire({
+                icon: 'warning',
+                title: 'Oops ...',
+                text: 'Geolocation not allowed, this component may not function.',
+                showConfirmButton: true,
+                backdrop: true,
+                customClass: {
+                    popup: 'popup-sweet',
+                    title: 'title-sweet',
+                    htmlContainer: 'text-sweet',
+                    confirmButton: 'confirm-button-sweet',
+                    denyButton: 'deny-button-sweet',
+                }
+            }).finally(() => {setActiveBlur(false)});
           }
         });
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      setActiveBlur(true);
+      MySwal.fire({
+          icon: 'warning',
+          title: 'Oops ...',
+          text: 'Geolocation is not supported by this browser.',
+          showConfirmButton: false,
+          timer: 1700,
+          backdrop: true,
+          customClass: {
+              popup: 'popup-sweet',
+              title: 'title-sweet',
+              htmlContainer: 'text-sweet',
+              confirmButton: 'confirm-button-sweet',
+              denyButton: 'deny-button-sweet',
+          }
+      }).finally(() => {setActiveBlur(false)});
     }
   }, []);
 
@@ -166,7 +189,7 @@ function WeatherPage() {
                     <p className="secondary-text">{response.location}</p>
                     <h2 className="temperature">{response.temperature ? response.temperature+'°' : '0°'}</h2>
                     <p className="icon-text">
-                      <img className="img-icon" src={`http://openweathermap.org/img/w/${response.icon}.png`} alt="Weather icon"/>
+                      <img className="img-icon" src={`http://openweathermap.org/img/w/${response.icon ? response.icon : '03d'}.png`} alt="Weather icon"/>
                       <span className="secondary-text">{response.condition}</span>
                     </p>
                   </div>
@@ -184,7 +207,12 @@ function WeatherPage() {
                   </div>
                 </div>
               </div>
-              <SearchComponent search={search} searcher={searcher} placeholder={"Search a specific location"} onclick={searchSpecificData}/>
+              <div className="search-container">
+                <div className="text-search-container">
+                  <span>Search specific locations:</span>
+                </div>
+                <SearchComponent search={search} searcher={searcher} placeholder={"Location name"} onclick={searchSpecificData}/>
+              </div>
             </>
           )}
       </React.Fragment>

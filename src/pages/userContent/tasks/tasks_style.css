@@ -1,0 +1,76 @@
+.list-task{
+    height: 320px;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+
+.list-task::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list-task::-webkit-scrollbar-thumb {
+    background-color: #9D9D9D;
+    border-radius: 6px;
+}
+
+.list-task::-webkit-scrollbar-track {
+    background-color: #f1f1f100;
+}
+
+.task-item{
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.icon-color{
+    color:#000;
+}
+
+.todo-add-button-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0px;
+    left: 0;
+    bottom: 0;
+    color: white;
+    text-align: center;
+}
+    
+
+.todo-add-button{
+    display: flex;
+    width: 20%;
+    height: 45px;
+    padding: 8px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border-color: transparent;
+    font-weight: bold;
+    color: #FFF;
+    background: var(--main-blue-color);
+    cursor: pointer;
+}
+
+.inputTodo{
+    height:45px;
+    width: 78%;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.task-checkbox-container{
+    justify-content: end;
+}
+
+.linethrough{
+    text-decoration: line-through;
+}

@@ -7,9 +7,9 @@ import {
     TableContainer, TableHead, TableRow
 } from '@mui/material';
 import '../../../components/Shared/SharedStyles.css'
-import { PopupInfoTaskToApprove } from './PopupInfoTaskToApprove';
+import { PopupInfoNews } from './PopupInfoNews';
 
-function TableTasksToApprove(props) {
+function TableNews(props) {
     const { setActiveBlur } = useContext(GlobalContext)
     const [dataNews, setDataNews] = useState(props.data);
     const [selectedNew, setSelectedNew] = useState();
@@ -33,26 +33,26 @@ function TableTasksToApprove(props) {
     return <React.Fragment>
         <Popup isOpen={isPopupOpen} onClose={closePopup} modalClass="popup-info-task">
             {selectedNew && (
-                <PopupInfoTaskToApprove
+                <PopupInfoNews
                     selectedNew={selectedNew}
                     closePopup = {closePopup}
                 />
             )}
         </Popup>
-        <div className="table-tasks">
+        <div className="table-news">
             <TableContainer>
                 <Table>
-                    <TableHead className="tasks-summary-head">
+                    <TableHead className="news-summary-head">
                         <TableRow>
-                            <TableCell className="task-summary-headers">Title</TableCell>
-                            <TableCell className="task-summary-headers">Source</TableCell>
-                            <TableCell className="task-summary-headers">Publication Date</TableCell>
+                            <TableCell className="news-summary-headers">Title</TableCell>
+                            <TableCell className="news-summary-headers">Source</TableCell>
+                            <TableCell className="news-summary-headers">Publication Date</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody className="tasks-summary-body">
-                        {dataNews.map((row) => {
+                    <TableBody className="news-summary-body">
+                        {dataNews.map((row, index) => {
                             return (
-                            <TableRow className={`task-summary-row pointer`} onClick={() => handleRowClick(row)} key={row.id}>
+                            <TableRow className={`news-summary-row pointer`} onClick={() => handleRowClick(row)} key={index}>
                                 <TableCell>{row.title ? row.title : ''}</TableCell>
                                 <TableCell>{row.source.name ? row.source.name : 'No Source Specified'}</TableCell>
                                 <TableCell>{row.publishedAt ? format(new Date(row.publishedAt), 'MM/dd/yyyy HH:mm') : 'No Date Specified'}</TableCell>
@@ -65,4 +65,4 @@ function TableTasksToApprove(props) {
     </React.Fragment>
 }
 
-export { TableTasksToApprove };
+export { TableNews };

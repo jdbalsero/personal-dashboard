@@ -7,7 +7,7 @@ function ContentHeader(props) {
 
     return (
         <React.Fragment>
-            <h1 className='ContentHeader' style={{color:'#004752', fontWeight:'normal'}}>
+            <h1 className='ContentHeader' style={{color:'#5873FE', fontWeight:'normal'}}>
                 {text}
             </h1>
         </React.Fragment>

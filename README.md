@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Personal Dashboard (Assessment)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+It contain basically 3 widgets:
 
 ## Available Scripts
 

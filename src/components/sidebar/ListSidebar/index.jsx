@@ -1,19 +1,16 @@
 import React from 'react';
 import { ButtonSidebar } from '../ButtonSidebar';
 import '../ButtonSidebar/ButtonSidebar.css';
-import Badge from '@mui/material/Badge';
-
 
 function ListSidebar(props) {
 
-    const { selectedOption, isCollapsed, showBadge } = props;
+    const { selectedOption, isCollapsed } = props;
 
     return (
         <ul className={props.className}>
             {props.options.map((option) => (
                 <li key={option.name}>
                     {(option.name === "Support" || option.name === "Messages Admin")? 
-                        <Badge variant="dot" invisible={showBadge} color="primary">
                         <ButtonSidebar
                             className={`ButtonSidebar ${isCollapsed ? 'collapsed' : ''} ${selectedOption === option.name ? 'selected' : ''}`
                             }
@@ -23,7 +20,6 @@ function ListSidebar(props) {
                             children={!isCollapsed && option.name}
                         >
                         </ButtonSidebar>
-                        </Badge>
                         : <ButtonSidebar
                             className={`ButtonSidebar ${isCollapsed ? 'collapsed' : ''} ${selectedOption === option.name ? 'selected' : ''}`
                             }

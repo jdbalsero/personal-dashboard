@@ -8,7 +8,7 @@
     width: 160px;
     height: 30px;
 
-    background: var(--main-petroleum-color);
+    background: var(--main-blue-color);
     border-radius: 10px;
     color: #fff;
 
@@ -22,11 +22,11 @@
 }
 
 .ButtonSidebar:hover {
-    background-color: var(--main-green-color);
+    background-color: var(--main-blue-dashed-color);
 }
 
 .ButtonSidebar.selected {
-    color: var(--main-petroleum-color);;
+    color: var(--main-blue-color);;
     background-color: #fff;
 }
 
