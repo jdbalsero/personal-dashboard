@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Overview
 
-It is a personal dashboard with useful widgets to manage tasks, read news or weather investigation. It was implemented using some pre-built components from previous projects where I was involved.
+It is a personal dashboard with useful widgets to manage tasks, calendar, read news or weather investigation. It was implemented using some pre-built components from previous projects where I was involved.
 
-Dashboard contains basically 3 widgets: 
+Dashboard contains basically 4 widgets: 
 
 - **Live Weather Widget:** Allows you to check the real time weather conditions from OpenWeatherMap API on your actual location (you need to allow access to your location) or just simply search for weather conditions in specific locations around the world.
 - **News Widget:** Allows you to check top-headlines from news divided by certain categories (general category is selected by default), you can change the category in the dropdown to check any other news. If you like you can also choose any new for more information. It was developed using information from GNews API.
@@ -14,6 +14,8 @@ Dashboard contains basically 3 widgets:
 - **Calendar Widget:** An additional widget (created with a brief and general implementation of react big calendar) that allows you to manage your personal calendar adding some events at specific dates and times, and also see them through the personalized calendar.
 
 ## How to Set Up and Run Locally ?
+
+**Note**: To ensure that the APIs Integration work well you will need to get the API Keys from OpenWeatherMap API and GNews API and register it into a new ".env" file of your project as "REACT_APP_OPENWEATHERAPI_KEY" and "REACT_APP_GNEWSAPI_KEY".
 
 When you download the repository only need to run
 
@@ -50,6 +52,10 @@ Also the project contains the implementation of the following APIs:
 
 - **OpenWeatherMap API:** used to get real time data of the weather by location around the world. It was used because as its name says, is an open API so we get some useful info and don't need to worry about the cost of it, and also for the simplicity to make requests to it.
 - **GNews API:** used to get the top headlines and additional data about news that is used on the News Widget. It was choosed because of the simplicity and understandability into the implementation, and also because this API allows to keep consuming its services in a production environment, it is important because the main "NewsAPI" require you to upgrade your subscription just to use it in production.
+
+## Live Demo
+
+Go to this [URL](https://personal-dashboard-kcy7h.ondigitalocean.app) to see the live demo of the dashboard.
 
 ## Learn More
 

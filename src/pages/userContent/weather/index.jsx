@@ -127,6 +127,12 @@ function WeatherPage() {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      searchSpecificData();
+    }
+  }
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.permissions
@@ -211,7 +217,7 @@ function WeatherPage() {
                 <div className="text-search-container">
                   <span>Search specific locations:</span>
                 </div>
-                <SearchComponent search={search} searcher={searcher} placeholder={"Location name"} onclick={searchSpecificData}/>
+                <SearchComponent search={search} onKeyDown={handleKeyDown} searcher={searcher} placeholder={"Location name"} onclick={searchSpecificData}/>
               </div>
             </>
           )}

@@ -5,7 +5,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import './SharedStyles.css';
 
 function SearchComponent(props) {
-    const { search, searcher, placeholder="Search", onclick } = props;
+    const { search, searcher, placeholder="Search", onclick, onKeyDown } = props;
     return <React.Fragment>
         <OutlinedInput 
             endAdornment={
@@ -18,6 +18,7 @@ function SearchComponent(props) {
             placeholder={placeholder} 
             value={search} 
             onChange={searcher}
+            onKeyDown={onKeyDown}
         />
     </React.Fragment>
 }

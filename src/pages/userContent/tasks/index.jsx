@@ -175,6 +175,12 @@ function TasksPage() {
         }
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          handleAddToDoTask();
+        }
+      }
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -227,7 +233,7 @@ function TasksPage() {
                     </Box>
                 }
                 <div className="todo-add-button-container">
-                    <OutlinedInput className="inputTodo" type="text" placeholder="Type the task you need" value={inputValue} onChange={handleChange} />
+                    <OutlinedInput className="inputTodo" type="text" placeholder="Type the task you need" value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown} />
                     <Button
                         buttonClassName="todo-add-button"
                         onClick={() => handleAddToDoTask() }
