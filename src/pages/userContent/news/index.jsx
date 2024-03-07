@@ -10,7 +10,7 @@ import withReactContent from 'sweetalert2-react-content';
 const MySwal = withReactContent(Swal);
 
 function NewsPage() {
-    const Categories = ['General', 'Business', 'Entertainment', 'Science', 'Sports', 'Health', 'Technology'];
+    const Categories = ['General', 'World', 'Business', 'Entertainment', 'Science', 'Sports', 'Health', 'Technology'];
     const { setActiveBlur } = useContext(GlobalContext);
     const [news, setNews] = useState([])
     const [value, setValue] = React.useState(Categories[0]);
@@ -18,8 +18,8 @@ function NewsPage() {
 
     const showNews = async (category=null) => {
         const API_BASE_URL = category === null ? 
-        `https://newsapi.org/v2/top-headlines?language=en&category=general&apiKey=${process.env.REACT_APP_NEWSAPI_KEY}`
-        : `https://newsapi.org/v2/top-headlines?language=en&category=${category}&apiKey=${process.env.REACT_APP_NEWSAPI_KEY}`;
+        `https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=${process.env.REACT_APP_GNEWSAPI_KEY}`
+        : `https://gnews.io/api/v4/top-headlines?lang=en&category=${category}&apikey=${process.env.REACT_APP_GNEWSAPI_KEY}`;
         try {
             const response = await fetch(API_BASE_URL).then(response => {
               return response;

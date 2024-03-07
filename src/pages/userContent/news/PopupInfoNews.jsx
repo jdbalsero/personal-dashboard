@@ -13,7 +13,6 @@ function PopupInfoNews(props) {
                     <div className={`modal-news-header ${classHeader}`}>
                         <section className="modal-news-header-right">
                             <label className="modal-news-label">Publication Date: {selectedNew.publishedAt ? format(new Date(selectedNew.publishedAt), 'MM/dd/yyyy HH:mm') : 'Unkown'}</label>
-                            <label className="modal-news-label">Author: {selectedNew.author ? selectedNew.author : 'Unknown'}</label>
                             <label className="modal-news-label">Source: {selectedNew.source.name ? selectedNew.source.name : 'Unknown'}</label>
                         </section>
                     </div>
