@@ -1,0 +1,38 @@
+.modal-events-header-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-blue-color);
+    padding-top: 10px;
+    margin: 10px;
+}
+
+.modal-events-header-title>h2 {
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 24px;
+    font-family: 'nib', sans-serif;
+}
+
+.full-events-modal{
+    max-height: 700px;
+    max-width: 1200px;
+}
+
+.modal-events-inputs{
+    display: flex;
+    column-count: 2;
+    gap: 12px;
+}
+
+.modal-events-name-description, .modal-events-dateInitial-dateFinal{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.events-button-container{
+    display: flex;
+    justify-content: center;
+}

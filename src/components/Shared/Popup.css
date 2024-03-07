@@ -45,7 +45,7 @@
 
 .ReactModal__Content {
     position: absolute;
-    top: 50%!important;
+    top: 40%!important;
     left: 50%!important;
     transform: translate(-50%, -50%);
     border: 1px solid black;
