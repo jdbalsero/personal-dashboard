@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TasksPage /> Tests Match Snapshot 1`] = `
+<div>
+  <div
+    class="todo-general-container"
+  >
+    <h1
+      class="ContentHeader"
+      style="color: rgb(88, 115, 254); font-weight: normal;"
+    >
+      Tasks
+    </h1>
+    <div
+      class="MuiBox-root css-8atqhb"
+      style="display: flex; justify-content: center; margin: 17px;"
+    >
+      <span
+        class="MuiTypography-root MuiTypography-body2 css-1phucj-MuiTypography-root"
+      >
+        You don't have any task in the list
+      </span>
+    </div>
+    <div
+      class="todo-add-button-container"
+    >
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary inputTodo css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          placeholder="Type the task you need"
+          type="text"
+          value=""
+        />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            class="css-ihdtdm"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+      <button
+        class="todo-add-button"
+        type="button"
+      >
+        <div>
+          Add Task
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -89,7 +89,7 @@ function TasksPage() {
             MySwal.fire({
                 icon: 'success',
                 title: 'Success',
-                text: 'To Do List Task Saved.',
+                text: 'To Do Task Saved.',
                 showConfirmButton: false,
                 timer: 1700,
                 backdrop: true,
